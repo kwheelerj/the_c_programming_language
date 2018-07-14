@@ -1,4 +1,10 @@
 *
-!.gitignore
-!*.*
-!*/
+#!*/
+#!.gitignore
+##########################
+# Keep only certain files
+##########################
+#!/ch2_types-operators-expressions/*
+#/ch2_types-operators-expressions/section2_02/*
+#!/ch2_types-operators-expressions/section2_02/*.c
+
