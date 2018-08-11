@@ -9,30 +9,18 @@ int main()
 {
 	int c;
 
-	c = getchar();
-	while(c != EOF)
-	{
-		if (c == '\t')
-		{
+	while( (c = getchar()) != EOF ) {
+		if (c == '\t') {
 			putchar('\\');
 			putchar('t');
-		}
-		else if (c == '\b')
-		{
+		} else if (c == '\b') {
 			putchar('\\');
 			putchar('b');
-		}
-		else if (c == '\\')
-		{
+		} else if (c == '\\') {
 			putchar('\\');
 			putchar('\\');
-		}
-		else
-		{
+		} else 
 			putchar(c);
-		}
-
-		c = getchar();
 	}
 
 	return 0;

@@ -5,9 +5,8 @@ int main()
 	/* Write a program to count blanks, tabs, and newlines. */
 	int c, blanks = 0, tabs = 0, newlines = 0, chars = 0;
 
-	c = getchar();
-	while (c != EOF)
-	{
+	
+	while ( (c = getchar()) != EOF ) {
 		if (c == '\n')
 			newlines++;
 		else if (c == '\t')
@@ -16,8 +15,6 @@ int main()
 			blanks++;
 		else
 			chars++;
-
-		c = getchar();
 	}
 	printf("blanks: %d\ntabs: %d\nnewlines: %d\nchars: %d\n",
 		       	blanks, tabs, newlines, chars);

@@ -8,27 +8,19 @@ int main()
 {
 	int c, spaceflag = 0;
 
-	c = getchar();
-	while(c != EOF)
-	{
-		if (spaceflag == 1)
-		{
-			if (c != ' ' && c != '\t')
-			{
+	while( (c = getchar()) != EOF ) {
+		if (spaceflag == 1) {
+			if (c != ' ' && c != '\t') {
 				spaceflag = 0;
 				putchar(c);
 			}
-		}
-		else {
-			if (c == ' ' || c == '\t')
-			{
+		} else {
+			if (c == ' ' || c == '\t') {
 				spaceflag = 1;
 				putchar(' ');
-			}
-			else
+			} else
 				putchar(c);
 		}
-		c = getchar();
 	}
 
 	return 0;

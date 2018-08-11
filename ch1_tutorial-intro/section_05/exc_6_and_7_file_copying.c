@@ -4,17 +4,17 @@ int main()
 {
 	int c;	
 
-	c = getchar();
-	printf("getchar() != EOF : %d\n", getchar() != EOF);
-	while(c != EOF)
+	while((c=getchar()) != EOF)
 	{
-		//printf("c != EOF: %d\n", c != EOF);
-		putchar(c);
-		c = getchar();
+		if (c == '\n')
+			printf("\\n");
+		else
+			putchar(c);
+		printf(" : getchar() != EOF: %d\n", c != EOF);
 	}
 
-	printf("End of file char is: %d\n", EOF);
-	printf("Last char sent: %d\n", c);
+	printf("getchar() != EOF: %d\n", c != EOF);
+	printf("End of file char is: %d\n", c);
 	
 	return 0;
 }

@@ -8,24 +8,19 @@
 int main()
 {
 	int c, state = OUT;
-	while ((c = getchar()) != EOF)
-	{
-		if (state == OUT)
-		{
-			if (!(c == ' ' || c == '\n' || c == '\t'))
-			{
+
+	while ((c = getchar()) != EOF) {
+		if (state == OUT) {
+			if (!(c == ' ' || c == '\n' || c == '\t')) {
 				putchar(c);
 				state = IN;
 			}
-		} 
-		else
-		{
+		} else {
 			if (c == ' ' || c == '\n' || c == '\t')
 			{
 				putchar('\n');
 				state = OUT;
-			}
-			else 
+			} else 
 				putchar(c);
 		}	
 	}
