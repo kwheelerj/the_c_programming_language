@@ -13,21 +13,16 @@ int main()
 	for (i = 0; i < 10; i++)
 		histogram[i] = 0;
 
-	while ((c = getchar()) != EOF)
-	{
-		if (state == IN)
-		{
+	while ((c = getchar()) != EOF) {
+		if (state == IN) {
 			if (c != ' ' && c != '\t' && c != '\n')
 				wordlength++;
-			else
-			{
+			else {
 				state = OUT;
 				histogram[wordlength]++;
 				wordlength = 0;
 			}
-		}
-		else
-		{
+		} else {
 			if (c != ' '  && c != '\t' && c != '\n')
 			{
 				state = IN;
@@ -39,8 +34,7 @@ int main()
 	}
 
 	printf("Histogram:\n");
-	for (i = 0; i < 10; i++)
-	{
+	for (i = 0; i < 10; i++) {
 		printf("Length of %d:\t", i);
 		count = histogram[i];
 		for (count = 0; count < histogram[i]; count++)
