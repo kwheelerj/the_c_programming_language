@@ -18,7 +18,7 @@ int main()
 	{
 		trim(line, len);
 		if (line[0] != '\n')
-			printf("%s", line);
+			printf(">%s<\n", line);
 	}
 
 	return 0;
@@ -30,8 +30,9 @@ int mygetline(char s[], int limit)
 
 	for (i = 0; i < limit-1 && (c = getchar()) != EOF && c != '\n'; i++)
 		s[i] = c;
-	if (c == '\n')
+	/*if (c == '\n')
 		s[i++] = c;
+	*/
 	s[i] = '\0';
 
 	return i;
@@ -39,22 +40,42 @@ int mygetline(char s[], int limit)
 
 void trim(char s[], int length)
 {
-	int i, atFirstWord = 0;
-	int return_s_index = 0;
+	int i, atFirstWord, inWord, return_s_index, end;
+	atFirstWord = inWord = return_s_index = end = 0;
 
 	for (i = 0; i < length; i++)
 	{
-		if (atFirstWord == 0)
+		if (!atFirstWord)
 		{
 			if (s[i] != ' ' && s[i] != '\t')
 			{
-				atFirstWord = 1;
+				atFirstWord = inWord = 1;
 				s[return_s_index++] = s[i];
+				end=return_s_index;
 			}
-
 		}
 		else
-			s[return_s_index++] = s[i];
+		{
+			if (inWord) {
+				if (s[i] == '\t' || s[i] == ' ')
+				{
+					inWord=0;
+					end=return_s_index;	
+				}	
+				else 
+					end=return_s_index + 1;	
+				s[return_s_index++] = s[i];
+			} 
+			else {
+				if (s[i] !='\t' && s[i] != ' ') {
+					inWord=1;
+					end=return_s_index + 1;
+				}
+				s[return_s_index++] = s[i];
+
+			}		
+			
+		}
 	}
-	s[return_s_index] = '\0';
+	s[end] = '\0';
 }
