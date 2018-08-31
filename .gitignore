@@ -1,4 +1,5 @@
 ch*/**/*.out
+ch*/**/*.o
 #*
 #!*/
 #!.gitignore
