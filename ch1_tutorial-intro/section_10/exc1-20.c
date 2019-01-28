@@ -1,44 +1,41 @@
-#include <stdio.h>
+#include <stdio.h>	/* for getchar() */
 
-#define	MAXLINE	1000
+#define	MAXLINE	100
 #define	TABSTOP	8
 
-/* Write a program "detab" that replaces tabs in the input with the \
- * proper number pf blanks to space to the next tab stop.
+/* Write a program "detab" that replaces tabs in the input with the
+ * proper number of blanks to space to the next tab stop.
  * Assume a fixed set of tab stops, say every 'n' columns.  Should
  * 'n' be a variable or a symbolic parameter?
  */
+/* MY ANSWER: it should be symbolic; doesn't change in life of pgm */
 
-int mygetline(char s[], int limit);
-
+int mygetline(char s[]);
 void replaceTabWithSpaces(char s[], int limit);
+void arr_printf(char s[]);
 
 int main()
 {
-	int length;
+	int len;
 	char line[MAXLINE];
 
-	while ((length = mygetline(line, MAXLINE)) > 0)
+	while ((len = mygetline(line)) > 0)
 	{
-		//printf("LINE is:\n%s\n", line);
-		replaceTabWithSpaces(line, length);
+		replaceTabWithSpaces(line, len);
 		printf("%s\n", line);
 	}
 
 	return 0;
 }
 
-int mygetline(char s[], int limit)
+int mygetline(char s[])
 {
 	int i, c;
-	for(i = 0; i <= limit-1 && (c = getchar()) != EOF && c != '\n'; i++)
-	{
+	for(i = 0; i < MAXLINE-1 && (c = getchar()) != EOF && c != '\n'; i++)
 		s[i] = c;
-	}
 	if (c == '\n')
 		s[i++] = c;
 	s[i] = '\0';
-
 	return i;
 }
 
@@ -52,43 +49,60 @@ int mygetline(char s[], int limit)
 void replaceTabWithSpaces(char s[], int length)
 {
 	int i, j, k, nspaces;
+	printf("\tlength=%d\n",length);
 	for (i = 0; s[i] != '\0'; i++)
 	{
-		//printf("s[%d] is: %c\n", i, s[i]);
 		if (s[i] == '\t')
 		{	
-			s[i] = '_';
-			//printf("found a tab\n");
-			nspaces = (TABSTOP - (i % TABSTOP)) - 1;
-			//printf("nspaces: %d\n", nspaces);
-			// push rest of the string forward
-			for (j = length-1; j >= i; j--)
+			nspaces = (TABSTOP - (i % TABSTOP));
+			/*printf("nspaces: %d\n",nspaces);*/
+			/* push rest of the string forward */
+			for (j = length-1; j > i; j--)
 			{
-				//printf("BEFORE:\n%s\n", s);
-
-				if (j + nspaces > MAXLINE-1)
+				if (j + nspaces - 1 > MAXLINE-1)
 				{
-					//printf("1st condition: %d > %d\n", j+nspaces, MAXLINE-1);
+					/*printf("\t1st condition: %d > %d\n", j+nspaces-1, MAXLINE-1);*/
 					continue;
 				}
-				else if (j + nspaces == MAXLINE-1)
+				else if (j + nspaces - 1 == MAXLINE-1)
 				{
-					//printf("2nd condition: %d == %d\n", j+nspaces, MAXLINE-1);
-					s[j+nspaces] = '\0';
+					/*printf("\t2nd condition: %d == %d\n", j+nspaces-1, MAXLINE-1);*/
+					s[j+nspaces-1] = '\0';
 				}
 				else
 				{
-					//printf("s[j+nspaces] is s[%d] is %c\n",
-					//		j+nspaces, s[j+nspaces]);
-					s[j+nspaces] = s[j];
+					/*printf("\t3rd condition: %d < %d\n",j+nspaces-1, MAXLINE-1);
+					printf("\tj=>%d<\n",j);
+					printf("\ts[j+nspaces-1] is s[%d]=>%c<\n", j+nspaces-1, s[j+nspaces-1]);
+					printf("\ts[j] is s[%d]=>%c<\n", j, s[j]);*/
+					s[j+nspaces-1] = s[j];
 				}
-
-				//printf("AFTER:\n%s\n", s);
+				//arr_printf(s);
 			}
-			length += nspaces;
+			length += nspaces-1;
 			for (k = 0; k < nspaces; k++)
 				s[i+k] = '_';
 		}
+		//arr_printf(s);
 	}
 	s[length-1] = '\0';
 }
+
+void arr_printf(char s[])
+{
+	int k;
+	printf("|");
+	for (k = 0; k < MAXLINE;k++)
+	{
+		if (s[k] == '\n')
+			printf("\\n|");
+		else if (s[k] == '\t')
+			printf("\\t|");
+		else if (s[k] == '\0')
+			printf("\\0|");
+		else
+			printf(" %c|",s[k]);
+	}
+	printf("\n");
+}
+       
