@@ -38,6 +38,10 @@ int htoi(char s[])
 			additional = s[i] - 87;
 		else if (s[i] >= '0' && s[i] <= '9')
 			additional = s[i] - '0';
+		else {
+			printf(">%c< is an invalid character - filtering out\n", s[i++]);
+			continue;
+		}
 
 		dec = 16 * dec + (additional);
 		

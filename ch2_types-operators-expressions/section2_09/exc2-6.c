@@ -11,38 +11,36 @@ void printbits(char s[], unsigned char x);
 int main()
 {
 	unsigned char x = 85;	// "01010101" -> 0x55
-	unsigned char y = 204;	// "01010001" -> 0xCC
+	unsigned char y = 204;	// "11001100" -> 0xCC
 	unsigned char result;
 	
-	printbits("x is: ", x);
-	printbits("y is: ", y);
+	printbits("x is:", x);
+	printbits("y is:", y);
 
-	// want result is "01010001" -> 81 -> 0x51
+	// want result is "01010100" -> 84 -> 0x54
 	result = setbits(x, 4, 3, y); 	
 	printbits("Result is: ", result);
-	printf("(Expected: 0x51)\n");
+	printf("(Expected: 0x54)\n");
 
 	return 0;
 }
 
 unsigned char setbits(unsigned char x, int p, int n, unsigned char y)
 { 
-	unsigned char x_masked;
-	unsigned char inter;
+	unsigned char x_masked, y_masked;
 
-	y &= ~(~0 << n);
-	y <<= (p + 1 - n);
+	x_masked = x & (~0 << n);		//   "01010101"
+						// & "11111000" =
+//	printbits("x_masked is:", x_masked); 	//   "01010000" -> 0x50 -> 80
 
-//	x_masked = x & ~((~ZERO << (p+1)) >> n);
-	inter =  ~0 << (p+1);	
-	inter = ~(inter >> n);
-	
-	x &= inter;
+	y_masked = y & ~(~0 << n);		//   "11001100"
+						// & "00000111" =
+//	printbits("y_masked is:", y_masked);	//   "00000100" -> 0x4 -> 4
 
-	return (x | y);
+	return (x_masked | y_masked);
 }
 
 void printbits(char s[], unsigned char x)
 {
-	printf("%s%x\n", s, x);
+	printf("%s %x\n", s, x);
 }

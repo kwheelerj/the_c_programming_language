@@ -49,7 +49,10 @@ void squeeze(char s1[], char s2[])
 		for (k = 0; s2[k] != '\0'; k++)
 		{
 			if (s1[i] == s2[k])
+			{
 				flag = 1;
+				break;
+			}
 		}
 		
 		if (!flag)
