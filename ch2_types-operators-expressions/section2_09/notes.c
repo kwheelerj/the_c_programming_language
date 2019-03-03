@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <math.h>
 
 void printhex(unsigned char x);
@@ -11,8 +12,10 @@ int main()
 	unsigned char y = 255;	// "11111111" -> 0xFF
 	unsigned char result;
 	
-	printhex("x is:", x);
-	printhex("y is:", y);
+	printhex(x);
+	printbits(x);
+	printhex(y);
+	printbits(y);
 
 	result = x & 0177;
 	printhex(result);
@@ -27,18 +30,40 @@ int main()
 
 void printhex(unsigned char x)
 {
-	printf("Result in hex is >%x<\n", x);
+	printf("%d in hex is >%x<\n", x, x);
 }
 
 void printbits(unsigned char x)
 {
-	int exp = -1;
-	while ( (int)pow(2,exp) < x )
-		exp++;
+	int exp, power_test, result;
+	char bits[9];
+	unsigned char copy = x;
 
-	int i = exp;
-	for ( ; i >= 0; i++) {
-		result = num - (2^exp
+	strcpy(bits, "");
+	exp = 0;
+
+	while ( (int) pow(2,exp) < x )
+		exp++;
+	--exp;
+
+	int i = 7;
+	for ( ; i >= 0; i--)
+	{
+		power_test = (int) pow(2, i);
+		result = copy - power_test;
+		//printf("\t%d = %d - %d\n", result, copy, power_test);
+		if (result >= 0)
+		{
+			copy = result;
+			strcat(bits, "1");
+		}
+		else
+		{
+			strcat(bits, "0");
+		}
+		//printf("\t\t>%s<\n", bits);
 	}
-	printf("Result in bits is >%x<\n", x);
+	bits[8] = '\0';
+
+	printf("%d in bits is >%s<\n", x, bits);
 }
