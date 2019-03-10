@@ -38,6 +38,6 @@ void printbits(unsigned char x)
 	}
 	bits[8] = '\0';
 
-	printf("%d in bits is >%s<\n", x, bits);
+	printf("%d in bits is\t>%s<\n", x, bits);
 }
 #endif

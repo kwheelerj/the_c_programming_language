@@ -1,0 +1,6 @@
+/* 1 & x is going to keep x the same
+ * 0 & x is going to "change" x to '0'
+ *
+ * 1 | x is going to "change" x to '1'
+ * 0 | x is going to keep x the same.
+ */

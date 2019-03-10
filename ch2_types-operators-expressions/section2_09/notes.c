@@ -2,6 +2,13 @@
 #include <string.h>
 #include <math.h>
 
+/* 1 & x is going to keep x the same
+ * 0 & x is going to "change" x to '0'
+ *
+ * 1 | x is going to "change" x to '1'
+ * 0 | x is going to keep x the same.
+ */
+
 void printhex(unsigned char x);
 void printbits(unsigned char x);
 
@@ -16,6 +23,11 @@ int main()
 	printbits(x);
 	printhex(y);
 	printbits(y);
+
+	result = x >> 1;	// "00101010" = 42
+	printbits(result);
+	result = x << 1;	// "10101010" = 170
+	printbits(result);
 
 	result = x & 0177;
 	printhex(result);

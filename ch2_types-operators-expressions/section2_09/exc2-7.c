@@ -1,45 +1,48 @@
 #include <stdio.h>
+#include "printbits.h"
 
-/* Write a function "invert(x, p, n)" that retuns 'x' with the
- * 'n' bits that begin at position 'p' inverted (i.e., 1 changed
- * into 0 and vice versa), leaving the others unchanged.
+#define CHAR_SZ 8
+
+/* Exercise 2-7:
+ *	Write a function "invert(x,p,n)" that returns x with the n bits that
+ *	begin at position p inverted, leaving the others unchanged.
  */
 
 unsigned char invert(unsigned char x, int p, int n);
-void printbits(char s[], unsigned char x);
 
 int main()
 {
-	unsigned char x = 85;	// "01010101" -> 0x55
+	unsigned char x;
 	unsigned char result;
 
-	printbits("x is: ", x);
+	x = 85;					// "01010101" -> 0x55
+	printf("Input:\n\t");
+	printbits(x);
+	result = invert(x, 5, 4); 	
+	printf("\nOutput:\n\t");
+	printbits(result);
+	printf("\tExp:\t\t>01101001<\n");	// = 105 -> 0x69
 	
-	result = invert(x, 4, 3);
-	printbits("Result is: ", result);
-	printf("(Expected: 0x49)\n");
-	
-	return 0;
+
+return(0);
 }
 
 unsigned char invert(unsigned char x, int p, int n)
 {
-	unsigned char x_a, a, x_b, b;
-	
-	x_a = ~0 << (p+1);
-	x_a >>= n;
-	a = x & ~x_a;
-	//printbits("a is: ", a);
+	unsigned char x_c1, x_c2, x_p, m;
 
-	x_b = ~0 << (p+1);
-	x_b >>= n;
-	b = ~x & x_b;	
-	//printbits("b is: ", b);
+	x_c1 = x >> (p + 1);
+	x_c1 <<= (p + 1);
 
-	return a | b;
-}
+	x_c2 = x << (p + 1);
+	x_c2 >>= (p + 1);
 
-void printbits(char s[], unsigned char x)
-{
-	printf("%s%x\n", s, x);
+	x_p = x_c1 | x_c2;
+
+	m = ~x << CHAR_SZ - (p + 1);
+	m >>= CHAR_SZ - (p + 1);
+	m >>= (p + 1) - n;
+	m <<= (p + 1) - n;
+
+	return (x_p | m);
 }
