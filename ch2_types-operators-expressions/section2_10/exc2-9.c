@@ -4,6 +4,12 @@
  * 1-bit in x.  Use this observation to write a faster version of "bitcount".
  */
 
+/* "01010101" *//* "01010100" *//* "01010000" *//* "0100000" */
+/* "01010100" *//* "01010011" *//* "01001111" *//* "0011111" */
+/* "01010100" *//* "01010000" *//* "01000000" *//* "0000000" */
+
+/* Every iteration causes the most right 1-bit to be effectively removed */
+
 int bitcount_fast(unsigned char x);
 
 int main()
@@ -13,7 +19,7 @@ int main()
 	
 	result = bitcount_fast(x);
 	
-	printf("1 bits count is: %d\n", result);
+	printf("1-bits count is: %d\n", result);
 
 	return 0;
 }

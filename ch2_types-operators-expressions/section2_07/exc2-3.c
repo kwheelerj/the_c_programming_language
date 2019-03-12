@@ -58,34 +58,9 @@ int mygetline(char s[], int limit)
 
 	for (i = 0; i < limit-1 && (c = getchar()) != EOF && c != '\n'; i++)
 		s[i] = c;
-	if (c = '\n')
+	if (c == '\n')
 		s[i++] = '\0';
 	//s[i] = '\0';
 	
 	return i;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
