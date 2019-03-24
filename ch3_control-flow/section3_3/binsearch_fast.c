@@ -1,7 +1,9 @@
 #include <stdio.h>
 
-int binsearch_fast(int x, int v[], int n);
 #define SIZE	100000
+
+int binsearch_fast(int x, int v[], int n);
+
 int main()
 {
 	int result, i;
@@ -27,10 +29,9 @@ int binsearch_fast(int x, int v[], int n)
 		mid = (low+high)/2;
 		if (x <= v[mid])
 			high = mid-1;
-		else if (x > v[mid])
+		else
 			low = mid+1;
 	}
-	if (x == v[mid])
-		return mid;
-	return -1;
+
+	return (x == v[mid]) ? mid : -1;
 }
