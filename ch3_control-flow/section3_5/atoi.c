@@ -1,10 +1,8 @@
 #include <ctype.h>
-#include <stdio.h>
+#include "../mygetline.h"
 
-#define MAXLIMIT	10000
 
 int atoi(char s[]);
-int mygetline(char s[], int limit);
 
 int main()
 {
@@ -22,23 +20,12 @@ int main()
 int atoi(char s[])
 {
 	int i, n, sign;
-	for (i=0; isspace(s[i]); i++)
+	for (i=0; isspace(s[i]); i++)	/* skip white space */
 		;
 	sign = (s[i] == '-') ? -1 : 1;
-	if (s[i] == '+' || s[i] == '-')
+	if (s[i] == '+' || s[i] == '-')	/* skip sign */
 		i++;
 	for (n = 0; isdigit(s[i]); i++)
 		n = 10 * n + (s[i] - '0');
 	return sign * n;	
-}
-
-int mygetline(char s[], int limit)
-{
-	int i;
-	char c;
-	for (i=0; i<limit-1 && (c = getchar()) != EOF && c != '\n'; i++)
-		s[i] = c;
-	if (c == '\n')
-		s[i++] = '\0';
-	return i;
 }
