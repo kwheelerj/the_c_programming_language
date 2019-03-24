@@ -21,8 +21,8 @@ int main()
 	escape(line, escaped_line, MAXLIMIT);
 	unescape(escaped_line, unescaped_line, MAXLIMIT);
 
-	printf("%s\n", escaped_line);
-	printf("%s\n", unescaped_line);
+	printf("Escaped Line:\n\t%s\n", escaped_line);
+	printf("Unescaped Line:\n\t%s\n", unescaped_line);
 
 	return 0;
 }
