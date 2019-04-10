@@ -9,6 +9,11 @@ int main()
 {
 	char line[12];
 	int inp;
+
+	inp = 2147483646;
+	itoa(inp, line);
+	printf("%s\n", line);
+
 	inp = -2147483647;
 	itoa(inp, line);
 	printf("%s\n", line);
@@ -34,9 +39,11 @@ void itoa(int n, char s[])
 		s[i++] = n % 10 + '0';		/* get next digit */
 	} while ( (n /= 10) > 0);		/* delete it */
 
-	s[0] += 1;						/* correct the number back */
 	if (sign < 0)
+	{
+		s[0] += 1;						/* correct the number back */
 		s[i++] = '-';
+	}
 	s[i] = '\0';
 	reverse(s);
 }
