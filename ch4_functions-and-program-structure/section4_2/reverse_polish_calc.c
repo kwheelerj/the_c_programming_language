@@ -97,16 +97,17 @@ int getop(char s[])
 	if (isdigit(c))		/* collect integer part */
 		while (isdigit(s[++i] = c = getch()))
 			;
-		if (c == '.')	/* collect fraction part */
-			while (isdigit(s[++i] = c = getch()))
-				;
 
-		s[i] = '\0';
+	if (c == '.')	/* collect fraction part */
+		while (isdigit(s[++i] = c = getch()))
+			;
 
-		if (c != EOF)
-			ungetch(c);
+	s[i] = '\0';
 
-		return NUMBER;
+	if (c != EOF)
+		ungetch(c);
+
+	return NUMBER;
 }
 
 #define BUFSIZE 100
