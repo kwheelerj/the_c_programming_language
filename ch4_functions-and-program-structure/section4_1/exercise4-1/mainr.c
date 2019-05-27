@@ -14,7 +14,8 @@ int main()
 	int i;
 
 	while (mygetline(line, MAXLINE) > 0)
-		if ( (i = strrindex(line, pattern)) >= 0 )
+		
+		if ( ( i = strrindex(line, pattern) ) >= 0 )
 		{
 			printf("found the rightmost index of 'ould' at index %d\n", i);
 			printf("%s", line);

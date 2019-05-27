@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "reverse.c"
 
 int strrindex(char src[], char t[])
@@ -14,8 +15,11 @@ int strrindex(char src[], char t[])
 		if (k > 0 && t[k] == '\0')	/* actually found the full pattern */
 		{
 				reverse(src);
-				return (strlen(src)-1 - k);
+				reverse(t);
+				return strlen(src) - i - k;
 		}
 	}
+	
+	reverse(t);
 	return -1;
 }
