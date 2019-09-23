@@ -1,52 +1,52 @@
 #include <stdio.h>
+#include <ctype.h>
 
-void test(int, int, float);
+#include "getch.c"
+
+#define SIZE 10
+
+//int getint(int *);
 
 int main()
 {
-	int a = 12;
-	float b = 4.1;
-	float c = 4.0;
+	int n, array[SIZE], getint(int *);
 
-	test(1, a, b);
-	test(2, a, c);
+	printf("test\n");
+	
+	for(n=0; n < SIZE && getint(&array[n]) != EOF; n++)
+		;
 
-
-printf("Conclusion:\n");
-printf("\tint op float will PROMOTE the answer to a float; be prepared to store it or print as such.\n");
-printf("\tIf you print %%d for a float-sized value, then the decimal places (float part) will be truncated.\n");
-
-return 0;
+return(0);
 }
 
-void test(int testcase_num, int i, float f)
+/* getint: get next integer from input into *pn */
+int getint(int *pn)
 {
-	int	int_sized_var;
-	float float_sized_var;
+    int c, sign;
 
-	printf("test case %d: i = %d; f = %.1f\n", testcase_num, i, f);
-	printf("-----------------------------\n");
+    while ( isspace(c = getch()) )
+        ;
 
-	printf("\tmultiply operator:\n");
-	printf("\t------------------\n");
-	int_sized_var = i * f;
-	float_sized_var = i * f;
-	printf("\ta) i * f = %d [%%d]\n", i * f);
-	printf("\tb) (float)i * f = %d [%%d]\n", (float)i * f);
-	printf("\t*c) i * f = %f [%%f]\n", i * f);
-	printf("\td) (float)i * f = %f [%%f]\n", (float)i * f);
-	printf("\te) (i * f => ) int_sized_var = %d [%%d]\n", int_sized_var);
-	printf("\t*f) (i * f => ) float_sized_var = %f [%%f]\n\n", float_sized_var);
+    if ( !isdigit(c) && c != EOF && c != '+' && c != '-' )
+    {
+        ungetch(c);
+        return 0;
+    }
 
-	printf("\tdivision operator:\n");
-	printf("\t------------------\n");
-	int_sized_var = i / f;
-	float_sized_var = i / f;
-	printf("\ta) i / f = %d [%%d]\n", i / f);
-	printf("\tb) (float)i / f = %d [%%d]\n", (float)i / f);
-	printf("\t*c) i / f = %f [%%f]\n", i / f);
-	printf("\td) (float)i / f = %f [%%f]\n", (float)i / f);
-	printf("\te) (i / f => ) int_sized_var = %d [%%d]\n", int_sized_var);
-	printf("\t*f) (i / f => ) float_sized_var = %f [%%f]\n\n", float_sized_var);
-	printf("=============================\n");
+    sign = (c == '-') ? -1 : 1;
+
+    if (c == '+' || c == '-')
+        c = getch();
+
+    for (*pn = 0; isdigit(c); c = getch())
+        *pn = 10 * *pn + (c - '0');
+
+    *pn *= sign;
+    printf("\t*pn = %d\n", *pn);
+
+    if (c != EOF)
+        ungetch(c);
+	printf("right before return.\n");
+    return c;
 }
+

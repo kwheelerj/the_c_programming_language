@@ -7,7 +7,6 @@ int main()
 	int x = 1, y = 2, z[10];
 
 	int *ip;	/* This declares/defines variable ip as a pointer */
-
 	//print_values(x, y, z[0], z[11], *ip);
 	/* If one tries to print the value of a pointer which has not been initialized,
 	 * they will get a "Segmentation fault".
@@ -15,23 +14,19 @@ int main()
 
 	ip = &x;	/* ip now points to x; variable ip holds address of variable x */
 	/* If ip is not defined as a pointer before the previous line, then
-	 *	the compiler will warn of a making an integer of a pointer, &x being the pointer.
+	 *	the compiler will warn of making an integer of a pointer, &x being the pointer.
 	 */
-
 	print_values(x, y, z[0], z[11], *ip);
 
 	y = *ip;	/* y is now the value of the pointer (1) */
-
 	print_values(x, y, z[0], z[11], *ip);
 
 	*ip = 0;	/* The value of the pointer ip is now 0, so x = 0 */
-	/* Note that y does NOT also equal 0, since y was set to be the value of
-	 *	the pointer; it attained a copy of the value; y is NOT also a pointer! */
-
+	/* Note that y does NOT also equal 0, since y was set to be the VALUE of
+	 *	the pointer; it attained a COPY of the value; y is NOT also a pointer! */
 	print_values(x, y, z[0], z[11], *ip);
 
-	ip = &z[0];	/* ip points to z[0] */
-
+	ip = &z[0];	/* ip POINTS to z[0] */
 	print_values(x, y, z[0], z[11], *ip);
 
 /* Some things to note at this point in time:
@@ -62,6 +57,8 @@ int main()
 
 	iq = ip;	/* pointer iq points to what pointer ip points to (address values) */
 	printf("*iq = %d\n", *iq);
+	printf("\t(iq = %d)\n", iq);
+	printf("\t(ip = %d)\n", ip);
 
 
 return 0;
