@@ -1,0 +1,9 @@
+"Any operation that can be achieved by array subscripting can also be done with pointers."
+
+*p++	/* increment pointer p, THEN resolve the pointer to the value */
+*p++ = val	/* push val onto "stack" */
+val = *--p	/* pop top of the "stack" into val */
+*++p;		/* increment the pointer at p, then resolve the pointer */
+
+++*p;	/* increment the value at pointer p by 1; *p += 1; */
+(*p)++	/* increment the value at pointer p by 1; *p += 1 */
