@@ -7,7 +7,7 @@ int strindex(char src[], char t[])
 		for (j=i, k=0; t[k] != '\0' && src[j] == t[k]; j++, k++)
 			;
 		if (k > 0 && t[k] == '\0')	/* actually found the full pattern */
-				return k;
+				return i;
 	}
 	return -1;
 }

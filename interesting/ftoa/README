@@ -1,0 +1,19 @@
+The book mentions the itoa function, but does not go into the ftoa sibling.
+I actually wrote one for work, so that I can apply it to a larger problem.
+But while going back over it and testing it with the FLT_MAX and FLT_MIN values,
+I noticed that my version failed!
+This came down to my function first separating out the integral part from the
+decimal part of the float value, but I would try to put the integral part into
+an int value.  The problem is that the integral part of FLT_MAX is the following:
+
+340282346638528859811704183484516925440.000000
+
+The integral is not only too large for an int data type, but for long, and long long
+for that matter!
+
+For the purposes of my program at where I work, this is no problem.  There will not be
+a time that the program will have to deal with such a large float value.
+But the problem is very interesting.  I decided I would like to explore it at home.
+Here it goes!
+
+Kenneth
